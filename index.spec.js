@@ -2,14 +2,14 @@ const preprocessor = require('./index');
 const p = preprocessor;
 
 describe('define', () => {
-  it('should inline constant expressions', () => {
+  it('can be used with var', () => {
     expect(p(`
-// #define radians
-const radians = deg => deg * Math.PI / 180;
-// #define end
-const startAngle = radians(20);
+// #define PI
+var PI = 3.1416;
+// #end
+const pi = PI;
 `)).toBe(`
-const startAngle = 1.0472;
+const pi = 3.1416;
 `);
   })
 });
