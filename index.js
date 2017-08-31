@@ -1,5 +1,6 @@
 const NEWLINE = /[\r\n]/g;
 const IFENV = /\/\/\s?#ifenv\s(\S*)/;
+const ELSE = /\/\/\s?#else/;
 const ENDIF = /\/\/\s?#endif/;
 
 function preprocessor(buffer) {
@@ -12,11 +13,18 @@ function preprocessor(buffer) {
 
     if (IFENV.test(line)) {
       const [, token] = line.match(IFENV);
-      const keep = process.env[token] !== undefined;
+      let keep = process.env[token] !== undefined;
 
       line = lines[++index];
 
       while (!ENDIF.test(line)) {
+        if (ELSE.test(line)) {
+          keep = !keep;
+
+          line = lines[++index];
+          continue;
+        }
+
         if (keep) { out.push(line); }
 
         line = lines[++index];
