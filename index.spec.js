@@ -1,19 +1,22 @@
 const preprocessor = require('./index');
+const fixtures = require('./fixtures');
 const p = preprocessor;
 
-describe('define', () => {
-  it('can be used with var', () => {
-    expect(p(`
-// #define PI
-var PI = 3.1416;
-// #end
-const pi = PI;
-`)).toBe(`
-const pi = 3.1416;
-`);
-  })
+beforeEach(() => {
+  process.env = {};
+});
+
+describe('ifenv', () => {
+  it('should keep lines if exists', () => {
+    process.env['STEAM'] = 1;
+    expect(p(fixtures.steam)).toBe(fixtures.steam_ok);
+  });
+
+  it('should remove lines if not exists', () => {
+    expect(p(fixtures.steam)).toBe(fixtures.steam_not);
+  });
 });
 
 it('should not otherwise change the input', () => {
-  expect(p('ana are mere')).toBe('ana are mere');
+  expect(p(fixtures.identity)).toBe(fixtures.identity);
 });
