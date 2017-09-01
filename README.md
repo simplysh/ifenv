@@ -1,5 +1,5 @@
 # ifenv
-`ifenv` is a tiny preprocessor for JavaScript loosely modelled after C. It can be used on its own or as a webpack loader. Its main purpose is to remove content from soruce files based on environment variables.
+`ifenv` is a tiny preprocessor for JavaScript loosely modelled after C. It can be used on its own or as a webpack loader. Its main purpose is to remove content from source files based on environment variables.
 
 ## directives
 ### \#ifenv
