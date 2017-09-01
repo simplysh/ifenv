@@ -1,24 +1,16 @@
 {
-  "name": "preprocessor",
-  "version": "0.0.1",
-  "description": "Preprocessor for JavaScript",
+  "name": "ifenv",
+  "version": "0.1.0",
+  "description": "Tiny preprocessor for JavaScript",
   "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "jest": "^20.0.4"
-  },
+  "repository": "git@github.com:simplysh/ifenv.git",
+  "author": "Andrei Nemes <simply.andrei@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "test": "jest",
     "watch": "jest --watchAll"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/simplysh/preprocessor.git"
-  },
-  "author": "Andrei Nemes",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/simplysh/preprocessor/issues"
-  },
-  "homepage": "https://github.com/simplysh/preprocessor#readme"
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
 }
