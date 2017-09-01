@@ -1,7 +1,20 @@
 const NEWLINE = /[\r\n]/g;
 const IFENV = /\/\/\s?#ifenv\s(\S*)/;
+const IFNENV = /\/\/\s?#ifnenv\s(\S*)/;
 const ELSE = /\/\/\s?#else/;
 const ENDIF = /\/\/\s?#endif/;
+
+const eitherOf = (a, b) => line => {
+  if (a.test(line)) {
+    return a;
+  }
+  if (b.test(line)) {
+    return b;
+  }
+
+  return undefined;
+}
+const isConditional = eitherOf(IFENV, IFNENV);
 
 function preprocessor(buffer) {
   const lines = buffer.split(NEWLINE);
@@ -11,9 +24,12 @@ function preprocessor(buffer) {
   while (index < lines.length) {
     let line = lines[index];
 
-    if (IFENV.test(line)) {
-      const [, token] = line.match(IFENV);
-      let keep = process.env[token] !== undefined;
+    let conditional = isConditional(line);
+    if (conditional) {
+      const [, token] = line.match(conditional);
+      let keep = conditional === IFENV
+        ? process.env[token] !== undefined
+        : process.env[token] === undefined;
 
       line = lines[++index];
 

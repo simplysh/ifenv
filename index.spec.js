@@ -7,22 +7,42 @@ beforeEach(() => {
 });
 
 describe('ifenv', () => {
-  it('should keep lines if exists', () => {
+  it('should keep lines if set', () => {
     process.env['STEAM'] = 1;
-    expect(p(fixtures.steam)).toBe(fixtures.steam_ok);
+    expect(p(fixtures.ifenv)).toBe(fixtures.ifenv_set);
   });
 
-  it('should remove lines if not exists', () => {
-    expect(p(fixtures.steam)).toBe(fixtures.steam_not);
+  it('should remove lines unset', () => {
+    expect(p(fixtures.ifenv)).toBe(fixtures.ifenv_unset);
   });
 
-  it('should remove else if exists', () => {
+  it('should remove else if set', () => {
     process.env['GOG'] = 1;
-    expect(p(fixtures.dual)).toBe(fixtures.dual_ok);
+    expect(p(fixtures.ifenv_else)).toBe(fixtures.ifenv_else_set);
   });
 
-  it('should keep else if not exists', () => {
-    expect(p(fixtures.dual)).toBe(fixtures.dual_not);
+  it('should keep else if unset', () => {
+    expect(p(fixtures.ifenv_else)).toBe(fixtures.ifenv_else_unset);
+  });
+});
+
+describe('ifnenv', () => {
+  it('should remove lines if set', () => {
+    process.env['RELEASE_NO'] = 1;
+    expect(p(fixtures.ifnenv)).toBe(fixtures.ifnenv_set);
+  });
+
+  it('should keep lines unset', () => {
+    expect(p(fixtures.ifnenv)).toBe(fixtures.ifnenv_unset);
+  });
+
+  it('should keep else if set', () => {
+    process.env['TOOLCHAIN'] = 'gcc';
+    expect(p(fixtures.ifnenv_else)).toBe(fixtures.ifnenv_else_set);
+  });
+
+  it('should remove else if unset', () => {
+    expect(p(fixtures.ifnenv_else)).toBe(fixtures.ifnenv_else_unset);
   });
 });
 
