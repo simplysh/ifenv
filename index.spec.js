@@ -24,6 +24,15 @@ describe('ifenv', () => {
   it('should keep else if unset', () => {
     expect(p(fixtures.ifenv_else)).toBe(fixtures.ifenv_else_unset);
   });
+
+  it('can be used multiple times set', () => {
+    process.env['LOGGING'] = 'WARN';
+    expect(p(fixtures.ifenv_multiple)).toBe(fixtures.ifenv_multiple_set);
+  });
+
+  it('can be used multiple times unset', () => {
+    expect(p(fixtures.ifenv_multiple)).toBe(fixtures.ifenv_multiple_unset);
+  });
 });
 
 describe('ifnenv', () => {

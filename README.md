@@ -33,3 +33,25 @@ doSomething();
 doSomethingElse();
 ```
 
+## usage
+
+Install the package using
+
+```
+npm install ifenv
+```
+
+### webpack
+
+After installation, you can just add it as a loader within your webpack config:
+
+```
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['ifenv']
+      }
+    ]
+  }
+```
