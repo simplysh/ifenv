@@ -1,6 +1,6 @@
 {
   "name": "ifenv",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tiny preprocessor for JavaScript",
   "main": "index.js",
   "repository": "git@github.com:simplysh/ifenv.git",
